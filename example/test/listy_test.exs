@@ -16,6 +16,5 @@ defmodule ListyTest do
   test "single val test" do
     assert Listy.addup([4]) == 4 
   end
-
-
 end
+
