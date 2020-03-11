@@ -33,5 +33,13 @@ defmodule StructmeTest do
     assert els.num == 8
     assert then.num == 8
   end
+  test "identifier make" do
+    theid = %ExprC.IdentifierC{id: :lmao}
+    assert theid.id == :lmao
+  end
+  test "identifier make +" do
+    theid = %ExprC.IdentifierC{id: :+}
+    assert theid.id == :+
+  end
 end
 
