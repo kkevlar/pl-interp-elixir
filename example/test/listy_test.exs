@@ -16,5 +16,9 @@ defmodule ListyTest do
   test "single val test" do
     assert Listy.addup([4]) == 4 
   end
-end
 
+  test "another exception" do
+      assert_raise MyError, fn -> Listy.addup(5)
+      end
+  end
+end
