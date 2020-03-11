@@ -19,4 +19,3 @@ defmodule Interp do
     end
   end
 end
-
