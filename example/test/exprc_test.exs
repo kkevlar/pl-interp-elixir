@@ -1,4 +1,4 @@
-defmodule StructmeTest do
+defmodule ExprCTest do
   use ExUnit.Case
 
   test "sanity" do
