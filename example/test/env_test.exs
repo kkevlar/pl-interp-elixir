@@ -9,5 +9,9 @@ defmodule EnvTest do
     assert bind.name == :true
     assert bind.val == true
   end
+  test "lmao" do
+    [_head | [_h2 | [oof | _unused]]] = Bindings.makeTopEnv()
+    assert oof.val.code.(1,2) == 3
+  end
 end
 

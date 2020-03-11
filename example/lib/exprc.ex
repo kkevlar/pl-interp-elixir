@@ -23,5 +23,9 @@ defmodule ExprC do
     @enforce_keys [:sargs, :body]
     defstruct [:sargs, :body]  
   end
+  defmodule PrimV do
+    @enforce_keys [:name, :code]
+    defstruct [:name, :code]  
+  end
 end
 
