@@ -7,7 +7,7 @@ defmodule Extend_env do
         env
       else
         [sym_head | sym_tail] = sym_list
-        [val_head | val_tail] = sym_list
+        [val_head | val_tail] = val_list
         [%Bindings.Binding{name: sym_head, val: val_head}
           | extend_env(sym_tail, val_tail, env)]
       end
