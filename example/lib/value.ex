@@ -15,8 +15,8 @@ defmodule Value do
     @enforce_keys [:arg_list, :expr, :env]
     defstruct [:arg_list, :expr, :env]
   end
-  defmodule PriOpV do
-    @enforce_keys [:sym]
-    defstruct [:sym]
+  defmodule PrimV do
+    @enforce_keys [:code]
+    defstruct [:code]
   end
 end

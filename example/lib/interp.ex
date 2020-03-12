@@ -31,4 +31,8 @@ defmodule Interp do
   end
 
   #AppC
+  def interp(%{fun: fun, eargs: eargs},env) do
+
+  end
+
 end

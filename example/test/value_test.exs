@@ -30,9 +30,9 @@ defmodule ValueTest do
     assert exp == one_plus_two
   end
   test "make PriOpV +" do
-    lmao = %Value.PriOpV{sym: :+}
-    oof = lmao.sym
-    assert oof == :+
+    lmao = %Value.PrimV{code: &(&1 + &2)}
+    oof = lmao.code
+    assert oof == &(&1 + &2) 
   end
 
 end
