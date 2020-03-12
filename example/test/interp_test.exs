@@ -36,6 +36,16 @@ defmodule StructmeTest do
     expr = %ExprC.IfC{test: etest, then: ethen, else: eelse}
     assert Interp.interp(expr, []) == true
   end
+  test "interp a lambda" do
+    mylambda = %ExprC.LambdaC{sargs: [:x,:y], body: %ExprC.AppC{fun: %ExprC.IdentifierC{id: :+}, eargs: [%ExprC.IdentifierC{id: :x}, %ExprC.IdentifierC{id: :y}]}}
+    %{arg_list: a, expr: e, env: v} = Interp.interp(mylambda, [])
+    [_x | [y | _empty]] = a
+    %ExprC.AppC{fun: fun, eargs: _unused} = e 
+    %ExprC.IdentifierC{id: plus} = fun
+    assert y == :y
+    assert plus == :+
+    assert v == [] 
+  end
 
 
 end
