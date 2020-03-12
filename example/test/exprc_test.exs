@@ -12,13 +12,13 @@ defmodule ExprCTest do
   test "makestr" do
     lmao = %ExprC.StringC{str: "lmao"}
     oof = lmao.str
-    assert oof == "lmao" 
+    assert oof == "lmao"
   end
   test "makeif" do
     if = %ExprC.IfC{test: false, then: 20, else: "yay"}
-    test = if.test 
-    then = if.then 
-    els = if.else 
+    test = if.test
+    then = if.then
+    els = if.else
     assert test == false
     assert els == "yay"
     assert then == 20
@@ -26,9 +26,9 @@ defmodule ExprCTest do
   test "makeif with ast" do
     eight = %ExprC.NumC{num: 8}
     if = %ExprC.IfC{test: false, then: eight, else: eight}
-    test = if.test 
-    then = if.then 
-    els = if.else 
+    test = if.test
+    then = if.then
+    els = if.else
     assert test == false
     assert els.num == 8
     assert then.num == 8
@@ -42,4 +42,3 @@ defmodule ExprCTest do
     assert theid.id == :+
   end
 end
-

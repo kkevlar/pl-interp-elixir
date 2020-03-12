@@ -10,6 +10,7 @@ defmodule Interp do
       id == :true -> true
       id == :false -> false
     end
+    #Lookup.lookup(id, _env)
   end
   def interp(%{test: test, then: then, else: els}, env) do
     if Interp.interp(test, env) do
