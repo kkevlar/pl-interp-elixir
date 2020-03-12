@@ -1,7 +1,7 @@
 defmodule Lookup do
   def lookup(sym, env_list) do
     if length(env_list) <= 0 do
-      raise "lookup name not found!"
+      raise DUNQ
     else
       [head | tail] = env_list
       if sym == (head.name) do
