@@ -26,6 +26,9 @@ defmodule Interp do
   end
 
   #LamC
+  def interp(%{symbols: sym_list, exp: expr}, env) do
+    %Value.ClosV{arg_list: sym_list, expr: expr, env: env}
+  end
 
   #AppC
 end

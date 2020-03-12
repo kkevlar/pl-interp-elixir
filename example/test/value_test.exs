@@ -22,7 +22,8 @@ defmodule ValueTest do
   test "make ClosV (a,b) (AppC + a b)" do
     #AppC => defstruct [:fun, :eargs]
     one_plus_two = %ExprC.AppC{fun: %ExprC.IdentifierC{id: :+}, eargs: [%ExprC.NumC{num: 1}, %ExprC.NumC{num: 2}]}
-    close = %Value.ClosV{arg_list: [:a], expr: one_plus_two}
+    binding = %Bindings.Binding{name: :a, val: %Value.NumV{num: 1}}
+    close = %Value.ClosV{arg_list: [:a], expr: one_plus_two, env: [binding]}
     args = close.arg_list
     assert args == [:a]
     exp = close.expr
