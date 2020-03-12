@@ -1,14 +1,12 @@
 defmodule Lookup do
-  def lookup(sym, env_list) do
-    if length(env_list) <= 0 do
-      raise DUNQ
+  def lookup(_name, []) do
+    raise DUNQ
+  end
+  def lookup(name, [head | tail]) do
+    if name == (head.name) do
+      (head.val)
     else
-      [head | tail] = env_list
-      if sym == (head.name) do
-        (head.val)
-      else
-        lookup(sym, tail)
-      end
+      lookup(name, tail)
     end
   end
 end
