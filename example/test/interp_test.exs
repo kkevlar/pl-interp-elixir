@@ -12,29 +12,38 @@ defmodule StructmeTest do
     expr = %ExprC.StringC{str: "hello"}
     assert Interp.interp(expr, []) == "hello"
   end
-  test "interp stupid id true" do
-    bool = %ExprC.IdentifierC{id: :true}
-    assert Interp.interp(bool, []) == true
+
+  test "interp an id" do
+    symbol_a = %ExprC.IdentifierC{id: :a}
+    symbol_b = %ExprC.IdentifierC{id: :b}
+    symbol_c = %ExprC.IdentifierC{id: :c}
+    binding1 = %Bindings.Binding{name: :a, val: %Value.NumV{num: 1}}
+    binding2 = %Bindings.Binding{name: :b, val: %Value.NumV{num: 2}}
+    binding3 = %Bindings.Binding{name: :c, val: %Value.NumV{num: 3}}
+    assert Interp.interp(symbol_a, [binding1, binding2, binding3]) == %Value.NumV{num: 1}
+    assert Interp.interp(symbol_b, [binding1, binding2, binding3]) == %Value.NumV{num: 2}
+    assert Interp.interp(symbol_c, [binding1, binding2, binding3]) == %Value.NumV{num: 3}
   end
-  test "interp stupid id false" do
-    bool = %ExprC.IdentifierC{id: :false}
-    assert Interp.interp(bool, []) == false
-  end
+
   test "interp an if true" do
-    etest = %ExprC.IdentifierC{id: :true}
+    etest = %ExprC.IdentifierC{id: :trueth}
     ethen = %ExprC.NumC{num: 42}
-    eelse = %ExprC.IdentifierC{id: :true}
+    eelse = %ExprC.NumC{num: 43}
+    true_binding = %Bindings.Binding{name: :trueth, val: %Value.BoolV{bool: true}}
+    false_binding = %Bindings.Binding{name: :falsa, val: %Value.BoolV{bool: false}}
 
     expr = %ExprC.IfC{test: etest, then: ethen, else: eelse}
-    assert Interp.interp(expr,[]) == 42
+    assert Interp.interp(expr,[true_binding, false_binding]) == 42
   end
   test "interp an if false" do
-    etest = %ExprC.IdentifierC{id: :false}
+    etest = %ExprC.IdentifierC{id: :falsa}
     ethen = %ExprC.NumC{num: 42}
-    eelse = %ExprC.IdentifierC{id: :true}
+    eelse = %ExprC.NumC{num: 43}
+    true_binding = %Bindings.Binding{name: :trueth, val: %Value.BoolV{bool: true}}
+    false_binding = %Bindings.Binding{name: :falsa, val: %Value.BoolV{bool: false}}
 
     expr = %ExprC.IfC{test: etest, then: ethen, else: eelse}
-    assert Interp.interp(expr, []) == true
+    assert Interp.interp(expr, [true_binding, false_binding]) == 43
   end
 
 

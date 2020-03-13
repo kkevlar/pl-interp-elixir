@@ -8,12 +8,8 @@ defmodule Interp do
     s
   end
   #IdC
-  def interp(%{id: id}, _env) do
-    cond do
-      id == :true -> true
-      id == :false -> false
-    end
-    #Lookup.lookup(id, _env)
+  def interp(%{id: id}, env) do
+    Lookup.lookup(id, env)
   end
 
   #IfC

@@ -7,7 +7,7 @@ defmodule LookUpTest do
 
   test "Error for empty env" do
     bad_symbol = :a
-    assert_raise RuntimeError, fn -> Lookup.lookup(bad_symbol, []) end
+    assert_raise DUNQ, fn -> Lookup.lookup(bad_symbol, []) end
   end
 
   test "Raise Error for symbol not found" do
@@ -16,7 +16,7 @@ defmodule LookUpTest do
     blank_symbol = :c
     binding0 = %Bindings.Binding{name: good_symbol_1, val: %Value.PriOpV{sym: :+}}
     binding1 = %Bindings.Binding{name: good_symbol_2, val: %Value.PriOpV{sym: :-}}
-    assert_raise RuntimeError, fn -> Lookup.lookup(blank_symbol, [binding0, binding1]) end
+    assert_raise DUNQ, fn -> Lookup.lookup(blank_symbol, [binding0, binding1]) end
   end
 
   test "return value a" do
