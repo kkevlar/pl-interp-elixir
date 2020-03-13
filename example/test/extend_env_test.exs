@@ -9,7 +9,7 @@ defmodule ExtendEnvTest do
     value1 = %Value.NumV{num: 1}
     value2 = %Value.NumV{num: 2}
     empty_env = []
-    assert_raise RuntimeError, fn -> Extend_env.extend_env([:a, :b, :c], [value1, value2], empty_env) end
+    assert_raise DUNQ, fn -> Extend_env.extend_env([:a, :b, :c], [value1, value2], empty_env) end
   end
 
   test "Extend to empty env" do

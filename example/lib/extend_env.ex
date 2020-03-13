@@ -1,7 +1,7 @@
 defmodule Extend_env do
   def extend_env(sym_list, val_list, env) do
     if length(sym_list) != length(val_list) do
-      raise "Sym_list and Val_list must share same length to extend env"
+      raise DUNQ
     end
     Extend_env.extend_env_rec(sym_list, val_list, env)
   end
@@ -14,4 +14,3 @@ defmodule Extend_env do
           | extend_env_rec(sym_tail, val_tail, env)]
   end
 end
-
