@@ -14,7 +14,7 @@ defmodule Interp do
 
   #IfC
   def interp(%{test: test, then: then, else: els}, env) do
-    if Interp.interp(test, env) do
+    if Interp.interp(test, env) == %Value.BoolV{bool: true} do
       Interp.interp(then, env)
     else
       Interp.interp(els, env)
