@@ -1,11 +1,11 @@
 defmodule Interp do
   #NumC
   def interp(%{num: n}, _env) do
-    n
+    %Value.NumV{num: n}
   end
   #StringC
   def interp(%{str: s}, _env) do
-    s
+    %Value.StringV{str: s}
   end
   #IdC
   def interp(%{id: id}, env) do
@@ -27,8 +27,23 @@ defmodule Interp do
   end
 
   #AppC
-  def interp(%{fun: fun, eargs: eargs},env) do
-
+  def interp(%{fun: fun, eargs: eargs}, env) do
+    vfun = Interp.interp(fun, env)
+    vargs = for arg <- eargs, do: (fn (arg) -> Interp.interp(arg, env) end).(arg)
+    case vfun do
+      %Value.ClosV{arg_list: sargs, expr: expr, env: clo_env} ->
+        ext = Extend_env.extend_env(sargs, vargs, clo_env) 
+        Interp.interp(expr, ext)
+      %Value.PrimV{code: code}->
+        case vargs do
+          [%Value.NumV{num: numl},%Value.NumV{num: numr}] ->
+            %Value.NumV{num: code.(numl , numr)}
+          _ ->
+            raise "Prims take only two arguments both nums"
+        end
+      _ ->
+        raise "An application must take a closure or prim"
+    end
   end
 
 end

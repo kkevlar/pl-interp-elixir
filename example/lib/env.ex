@@ -6,9 +6,9 @@ defmodule Bindings do
   end
   def makeTopEnv do
     [
-   %Bindings.Binding{name: :true, val: true},
-   %Bindings.Binding{name: :false, val: false},
-   %Bindings.Binding{name: :+, val: %ExprC.PrimV{name: :plus, code: &(&1 + &2)}}
+   %Bindings.Binding{name: :true, val: true}, 
+   %Bindings.Binding{name: :false, val: false}, 
+   %Bindings.Binding{name: :+, val: %Value.PrimV{code: &(&1 + &2)}} 
     ]
   end
 
