@@ -22,9 +22,13 @@ defmodule Interp do
   end
 
   #LamC
-  def interp(%{symbols: sym_list, exp: expr}, env) do
+  def interp(%{sargs: sym_list, body: expr}, env) do
     %Value.ClosV{arg_list: sym_list, expr: expr, env: env}
   end
 
   #AppC
+  def interp(%{fun: fun, eargs: eargs},env) do
+
+  end
+
 end
