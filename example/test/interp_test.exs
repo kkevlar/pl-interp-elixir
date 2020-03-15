@@ -61,21 +61,34 @@ defmodule StructmeTest do
     %Value.NumV{num: num} = Interp.interp(myapp, [])
     assert num == 60
   end
-  test "interp closure with prim" do
-    mylambda = %ExprC.LambdaC{sargs: [:x,:y], body: %ExprC.AppC{fun: %ExprC.IdentifierC{id: :+}, eargs: [%ExprC.IdentifierC{id: :x}, %ExprC.IdentifierC{id: :y}]}}
-    myapp = %ExprC.AppC{fun: mylambda, eargs: [%ExprC.NumC{num: 60}, %ExprC.NumC{num: 12}]}
-    %Value.NumV{num: num} = Interp.interp(myapp, Bindings.makeTopEnv())
-    assert num == 72 
-  end
+
   test "interp a non closure or prim" do
     myapp = %ExprC.AppC{fun: %ExprC.StringC{str: "aaa"} , eargs: [%ExprC.NumC{num: 60}, %ExprC.NumC{num: 12}]}
     assert_raise RuntimeError, fn -> Interp.interp(myapp, Bindings.makeTopEnv()) end 
   end
+
+  test "interp closure with prim" do
+    mylambda = %ExprC.LambdaC{sargs: [:x,:y],
+      body: %ExprC.AppC{fun: %ExprC.IdentifierC{id: :+},
+      eargs: [%ExprC.IdentifierC{id: :x}, %ExprC.IdentifierC{id: :y}]}}
+    myapp = %ExprC.AppC{
+      fun: mylambda, 
+      eargs: [%ExprC.NumC{num: 60}, %ExprC.NumC{num: 12}]}
+    %Value.NumV{num: result} = Interp.interp(myapp, Bindings.makeTopEnv()) 
+    assert result == 72
+  end
+
   test "interp closure with prim wrong args" do
-    mylambda = %ExprC.LambdaC{sargs: [:x,:y], body: %ExprC.AppC{fun: %ExprC.IdentifierC{id: :+}, eargs: [%ExprC.IdentifierC{id: :x}, %ExprC.IdentifierC{id: :y}]}}
-    myapp = %ExprC.AppC{fun: mylambda, eargs: [%ExprC.NumC{num: 60}, %ExprC.NumC{num: 12}, %ExprC.NumC{num: 12}]}
+    mylambda = %ExprC.LambdaC{sargs: [:x,:y],
+      body: %ExprC.AppC{fun: %ExprC.IdentifierC{id: :+},
+      eargs: [%ExprC.IdentifierC{id: :x}, %ExprC.IdentifierC{id: :y}]}}
+    myapp = %ExprC.AppC{
+      fun: mylambda, 
+      eargs: [%ExprC.NumC{num: 60}, %ExprC.NumC{num: 12}, %ExprC.NumC{num: 12}]}
     assert_raise RuntimeError, fn -> Interp.interp(myapp, Bindings.makeTopEnv()) end 
   end
+
+
 
 
 
